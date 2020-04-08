@@ -3,7 +3,7 @@ import '../stylesheets/Area.css'
 import HostList from './HostList'
 
 const Area = (props) => {
-  const {id, name, limit} = props.area;
+  const {name} = props.area;
 
   const formatName = name => {
     return name.split("_").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')
@@ -14,7 +14,7 @@ const Area = (props) => {
     <h3 className='labels'>{formatName(name)}</h3>
 
     {/* See Checkpoint 1 item 2 in the Readme for a clue as to what goes here */}
-    <HostList />
+    <HostList hosts={props.hosts} onClickHost={props.onClickHost} />
 
   </div>
   )
@@ -22,9 +22,9 @@ const Area = (props) => {
 
 Area.propTypes = {
   hosts: function(props, propName, componentName){
-    if(props.hosts.length > props.limit){
+    if(props.hosts.length > props.area.limit){
       throw Error(
-        `HEY!! You got too many hosts in ${props.name}. The limit for that area is ${props.limit}. You gotta fix that!`
+        `HEY!! You got too many hosts in ${props.area.name}. The limit for that area is ${props.area.limit}. You gotta fix that!`
       )
     }
   }

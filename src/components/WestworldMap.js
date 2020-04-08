@@ -2,28 +2,13 @@ import React from 'react';
 import { Segment } from 'semantic-ui-react';
 import Area from './Area'
 
-const AREA_URL = "http://localhost:4000/areas";
-
-
-class WestworldMap extends React.Component {
-  state = {
-    areas: [],
-  }
-
-  componentDidMount() {
-    fetch(AREA_URL)
-    .then(resp => resp.json())
-    .then(data => this.setState({areas: data}))
-  }
-
-  render() {
+const WestworldMap = props => {
     return (
       <Segment id="map" >
-        {this.state.areas.map(area => {
-        return <Area key={area.id} area={area} />})}
+        {props.areas.map(thisArea => {
+        return <Area key={thisArea.id} area={thisArea} hosts={props.hosts.filter(host => host.area === thisArea.name)} onClickHost={props.onClickHost} />})}
       </Segment>
     )
-  }
 }
 
 export default WestworldMap

@@ -4,10 +4,15 @@ import { Card } from 'semantic-ui-react'
 
 const Host = (props) => {
   const {imageUrl} = props.host;
+  
+  const handleClick = () => {
+    props.onClickHost(props.host)
+  }
+
   return(
     <Card
-      className="host selected"
-      // onClick={handleClick}
+      className={props.detailHost ? "host selected" : "host"}
+      onClick={handleClick}
       image={imageUrl}
       raised
     />
@@ -15,3 +20,4 @@ const Host = (props) => {
 }
 
 export default Host
+
